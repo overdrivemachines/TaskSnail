@@ -5,4 +5,10 @@ class User < ApplicationRecord
 				 :recoverable, :rememberable, :trackable, :validatable
 	
 	has_many :tasks, dependent: :destroy
+
+	# Check is a user is either a "Soft User" or “Fully Registered” 
+	# based on their email address.
+	def soft_user?
+		self.email.empty?
+	end
 end

@@ -1,10 +1,16 @@
 class TasksController < ApplicationController
-	before_action :set_task, only: [:show, :edit, :update, :destroy]
+	before_action :set_task, only: [:edit, :update, :destroy]
+
+	respond_to :html
+	respond_to :js
 
 	# GET /tasks
 	# GET /tasks.json
 	def index
-		@tasks = Task.all
+		# Display tasks created by current_user
+		@user = current_user
+		@tasks = @user.tasks.all
+		respond_with(@tasks)
 	end
 
 	# GET /tasks/1

@@ -1,8 +1,16 @@
-// Hide the form
-$('form').hide();
+<% if current_user.needs_engagement? %>
+	
+	$('.my-tasks ul:first').append('<%= j render partial: "task", locals: {t: @task} %>');
+	$('.new-task-button').replaceWith('<h4>Registration Required to Add More Tasks!</h4>');
+	$('form').hide();
 
-// Append new task to existing list
-$('.my-tasks').append('<%= j render partial: "task", locals: {t: @task} %>');
+<% else %>
 
-// Show the New button
-$('.new-task-button').show();
+	// Hide the form
+	$('form').hide();
+	// Append new task to existing list
+	$('.my-tasks ul:first').append('<%= j render partial: "task", locals: {t: @task} %>');
+	// Show the New button
+	$('.new-task-button').show();
+
+<% end %>

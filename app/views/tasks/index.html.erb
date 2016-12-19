@@ -8,4 +8,12 @@
 
 <br>
 
+<div class="complete-tasks">
+	<% @tasks.complete.each do |task| %>
+		<h3><%= task.name %></h3>
+	<% end %>
+</div>
+
+<br>
+
 <%= link_to 'New Task', new_task_path, remote: true, class: "new-task-button" %>

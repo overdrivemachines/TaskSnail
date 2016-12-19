@@ -1,0 +1,5 @@
+// Find the New button and insert tasks/_form.html.erb partial after it.
+$('.new-task-button').after('<%= j render('form') %>');
+
+// Hide the New button
+$('.new-task-button').hide();

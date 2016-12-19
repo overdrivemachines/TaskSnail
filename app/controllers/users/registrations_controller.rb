@@ -49,12 +49,22 @@ class Users::RegistrationsController < Devise::RegistrationsController
 	# end
 
 	# The path used after sign up.
-	# def after_sign_up_path_for(resource)
-	#   super(resource)
-	# end
+	def after_sign_up_path_for(resource)
+		merge_tasks
+		super(resource)
+	end
 
 	# The path used after sign up for inactive accounts.
 	# def after_inactive_sign_up_path_for(resource)
 	#   super(resource)
 	# end
+
+	def merge_tasks
+		tasks = Task.where(soft_token: current_user.soft_token)
+		tasks.map do |task|
+			task.user = current_user
+			task.user_id = current_user.id
+			task.save!
+		end
+	end
 end

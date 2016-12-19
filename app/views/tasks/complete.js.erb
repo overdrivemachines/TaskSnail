@@ -2,7 +2,7 @@
 $('div#<%= dom_id(@task) %>').fadeOut();
 
 // Add the task to the completed tasks list
-$('.complete-tasks').append('<%= j render partial: "task", locals: {t: @task} %>');
+$('.complete-tasks ul:first').append('<%= j render partial: "task", locals: {t: @task} %>');
 
 // Strike the heading of the completed task
 $('div#<%= dom_id(@task) %>').find('h3').css('text-decoration', 'line-through');

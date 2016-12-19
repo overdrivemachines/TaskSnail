@@ -1,8 +1,8 @@
 <%= div_for t do %>
 	<h3><%= t.name %></h3>
 	<ul>
-		<li><%= link_to "Edit Task", new_task_path, remote: true %></li>
-		<li><%= link_to "Mark Complete", complete_path, remote: true %></li>
+		<li><%= link_to "Edit Task", edit_task_path(t), remote: true %></li>
+		<li><%= link_to "Mark Complete", complete_path(t), remote: true %></li>
 		<li><%= link_to "Delete Task", t, remote: true, method: :delete %></li>
 	</ul>
 <% end %>

@@ -12,13 +12,7 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :complete %>
-    <%= f.check_box :complete %>
+    <%= f.text_field :name, label: false, placeholder: "Task Name" %>
   </div>
 
   <div class="field">

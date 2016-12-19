@@ -1,0 +1,8 @@
+// Hide the form
+$('form').hide();
+
+// Append new task to existing list
+$('.my-tasks').append('<%= j render partial: "task", locals: {t: @task} %>');
+
+// Show the New button
+$('.new-task-button').show();

@@ -65,6 +65,11 @@ class TasksController < ApplicationController
 		end
 	end
 
+	def complete
+		@task = Task.find(params[:id])
+		@task.mark_complete!
+	end
+
 	private
 		# Use callbacks to share common setup or constraints between actions.
 		def set_task

@@ -2,8 +2,8 @@ class ApplicationController < ActionController::Base
 	protect_from_forgery with: :exception
 
 	# Override the default method
-	def authenticate_user!
-		current_user.present?
+	def authenticate_user!(*args)
+		current_user.present? || super(*args)
 	end
 
 	# Override the default method

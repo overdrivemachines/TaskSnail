@@ -5,22 +5,21 @@ class TasksController < ApplicationController
 	respond_to :js
 
 	# GET /tasks
-	# GET /tasks.json
 	def index
 		# Display tasks created by current_user
 		@user = current_user
-		@tasks = @user.tasks.all
+		if @user.soft_user?
+			@tasks = Task.where(soft_token: @user.soft_token)
+		else
+			@tasks = @user.tasks.all
+		end
 		respond_with(@tasks)
-	end
-
-	# GET /tasks/1
-	# GET /tasks/1.json
-	def show
 	end
 
 	# GET /tasks/new
 	def new
 		@task = Task.new
+		respond_with(@task)
 	end
 
 	# GET /tasks/1/edit
@@ -28,7 +27,6 @@ class TasksController < ApplicationController
 	end
 
 	# POST /tasks
-	# POST /tasks.json
 	def create
 		@user = current_user
 		@task = Task.new(task_params)
@@ -42,27 +40,15 @@ class TasksController < ApplicationController
 	end
 
 	# PATCH/PUT /tasks/1
-	# PATCH/PUT /tasks/1.json
 	def update
-		respond_to do |format|
-			if @task.update(task_params)
-				format.html { redirect_to @task, notice: 'Task was successfully updated.' }
-				format.json { render :show, status: :ok, location: @task }
-			else
-				format.html { render :edit }
-				format.json { render json: @task.errors, status: :unprocessable_entity }
-			end
-		end
+		@task.update(task_params)
+		respond_with(@task)
 	end
 
 	# DELETE /tasks/1
-	# DELETE /tasks/1.json
 	def destroy
 		@task.destroy
-		respond_to do |format|
-			format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
-			format.json { head :no_content }
-		end
+		respond_with(@task)
 	end
 
 	def complete

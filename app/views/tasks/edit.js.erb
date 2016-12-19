@@ -1,0 +1,4 @@
+$('form').hide();
+
+// Replace the correct DOM element with the edit form
+$('div#<%= dom_id(@task) %>').replaceWith('<%= j render("form") %>');

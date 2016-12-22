@@ -1,14 +1,18 @@
+# == Schema Information
+#
+# Table name: tasks
+#
+#  id         :integer          not null, primary key
+#  name       :string
+#  completed  :boolean
+#  user_id    :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 class Task < ApplicationRecord
-	belongs_to :user
-	validates :name, presence: true
+  belongs_to :user
 
-	scope :completed, -> { where(completed: true) }
-
-	def to_param
-		"#{id}-#{name.parameterize}"
-	end
-
-	def mark_complete!
-		self.update_attribute(:completed, true)
-	end
+  scope :complete, -> { where(:completed => true)}
+  scope :incomplete, -> { where(:completed => false)}
 end

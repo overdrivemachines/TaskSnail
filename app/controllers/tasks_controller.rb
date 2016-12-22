@@ -1,61 +1,62 @@
 class TasksController < ApplicationController
-	before_action :set_task, only: [:edit, :update, :destroy]
+  before_action :set_task, only: [:edit, :update, :destroy]
 
-	respond_to :html
-	respond_to :js
+  # http://edgeapi.rubyonrails.org/classes/ActionController/Responder.html
+  respond_to :html
+  respond_to :js
 
-	def index
-		@user = current_user
-		if @user.soft_user?
-			@tasks = Task.where(soft_token: @user.soft_token)
-		else
-			@tasks = @user.tasks.all
-		end
-		respond_with(@tasks)
-	end
+  # GET /tasks
+  def index
+    @complete_tasks = Task.complete
+    @incomplete_tasks = Task.incomplete
+  end
 
-	def new
-		@task = Task.new
-		respond_with(@task)
-	end
+  # GET /tasks/new
+  def new
+    @task = Task.new
+    respond_with(@task)
+  end
 
-	def edit
-	end
+  # GET /tasks/1/edit
+  def edit
+  end
 
-	def create
-		@user = current_user
-		@task = Task.new(task_params)
+  # POST /tasks
+  def create
+    @task = Task.new(task_params)
+    @task.user_id = current_user.id
+    @task.completed = false
+    @task.save
+    respond_with(@task)
+  end
 
-		if @user.soft_user?
-			@task.soft_token = @user.soft_token
-		end
+  # PATCH/PUT /tasks/1
+  def update
+    @task.update(task_params)
+    respond_with(@task)
+  end
 
-		@task.save
-		respond_with(@task)
+  # DELETE /tasks/1
+  def destroy
+    @task.destroy
+    respond_with(@task)
+  end
 
-	end
+  def complete
+    @task = Task.find(params[:id])
+    @task.completed = true
+    @task.save
+  end
 
-	def update
-		@task.update(task_params)
-		respond_with(@task)
-	end
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_task
+      @task = Task.find(params[:id])
+    end
 
-	def destroy
-		@task.destroy
-		respond_with(@task)
-	end
-
-	def complete
-		@task = Task.find(params[:id])
-		@task.mark_complete!
-	end
-
-	private
-	def set_task
-		@task = Task.find(params[:id])
-	end
-
-	def task_params
-		params.require(:task).permit(:name, :completed, :user_id)
-	end
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def task_params
+      # params.require(:task).permit(:name, :completed, :user_id)
+      params.require(:task).permit(:name)
+    end
 end

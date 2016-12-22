@@ -1,8 +1,2 @@
-// Hides the task from the DOM
-$('div#<%= dom_id(@task) %>').fadeOut();
-
-// Add the task to the completed tasks list
-$('.complete-tasks ul:first').append('<%= j render partial: "task", locals: {task: @task} %>');
-
-// Strike the heading of the completed task
-$('div#<%= dom_id(@task) %>').find('h3').css('text-decoration', 'line-through');
+$('div#<%= dom_id(@task) %>').hide();
+$('div.complete-tasks').append('<%= j render(partial: "task", locals:{task: @task}) %>');

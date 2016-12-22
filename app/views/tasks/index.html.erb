@@ -1,65 +1,20 @@
 <p id="notice"><%= notice %></p>
 
-<% if @user.soft_user? %>
-
-	<h3>Completed Tasks</h3>
-	<div class='completed-tasks'>
-		<ul class="small-block-grid-1 medium-block-grid-2 large-block-grid-3">
-		<% @tasks.completed.each do |task| %>
-			<%= render task %>
-		<% end %>
-		</ul>
-	</div>
-
-	<hr />
-
-	<h3>Incomplete Tasks</h3>
-	<div class="my-tasks">
-		<ul>
-			<% @tasks.where(completed: nil).each do |task| %>
-				<%= render task %>
-			<% end %>
-		</ul>
-	</div>
-
-	<% unless current_user.needs_engagement? %>
-		<div class="new-task-form"></div>
-		<%= link_to "New Task", new_task_path, remote: true, class: "new-task-button button radius" %>
-
-	<% else %>
-		<h4>Registration Required to Add More Tasks!</h4>
+<h1>Incomplete Tasks</h1>
+<div class="incomplete-tasks">
+	<% @incomplete_tasks.each do |task| %>
+		<%= render task %>
 	<% end %>
+</div>
 
-<% else %>
+<div class="new-task-form"></div>
+<%= link_to 'New Task', new_task_path, remote: true, class: "new-task-link" %>
 
-	<h3>Completed Tasks</h3>
-	<div class='completed-tasks'>
-		<ul class="small-block-grid-1 medium-block-grid-2 large-block-grid-3">
-		<% @tasks.where(completed: true).each do |task| %>
-			<%= render task %>
-		<% end %>
-		</ul>
-	</div>
+<h1>Complete Tasks</h1>
+<div class="complete-tasks">
+	<% @complete_tasks.each do |task| %>
+		<b><%= task.name %></b> by <%= task.user.email %>
+		<br>
+	<% end %> 
+</div>
 
-	<hr />
-
-	<h3>Incomplete Tasks</h3>
-	<div class="my-tasks">
-		<ul class="small-block-grid-1 medium-block-grid-2 large-block-grid-3">
-		<% @tasks.where(completed: nil).each do |task| %>
-			<%= render task %>
-		<% end %>
-		</ul>
-	</div>
-
-	<div class="new-task-form"></div>
-	<%= link_to "New Task", new_task_path, remote: true, class: "new-task-button button radius" %>
-<% end %>
-
-<% if current_user.soft_user? %>
-	<p><%= link_to "Sign Up", new_user_registration_path %> or <%= link_to "Login", new_user_session_path %></p>
-<% else %>
-
-	<p><%= link_to "Edit Profile", edit_user_registration_path %> or <%= link_to "Logout", destroy_user_session_path, method: :delete %></p>
-
-<% end %>

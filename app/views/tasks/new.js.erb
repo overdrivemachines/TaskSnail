@@ -1,5 +1,5 @@
-// Find the New button and insert tasks/_form.html.erb partial after it.
-$('.new-task-button').after('<%= j render('form') %>');
-
-// Hide the New button
-$('.new-task-button').hide();
+$('div.new-task-form').empty();
+$('div.new-task-form').show();
+$('div.new-task-form').append("<h3>New Task</h3>");
+$('div.new-task-form').append('<%= j(render(partial: "form", locals:{task: @task}))%>');
+$('a.new-task-link').hide();

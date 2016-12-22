@@ -1,8 +1,10 @@
-<%= div_for task do %>
-	<h3><%= task.name %></h3>
-	<ul>
-		<li><%= link_to "Edit Task", edit_task_path(task), remote: true %></li>
-		<li><%= link_to "Mark Complete", complete_path(task), remote: true %></li>
-		<li><%= link_to "Delete Task", task, remote: true, method: :delete %></li>
-	</ul>
+<%= div_for(task) do %>
+	<b><%= task.name %></b> by <%= task.user.email %> 
+	<% if (task.completed == false) %>
+		| 
+		<%= link_to "Mark Complete", complete_path(task), remote: true %> | 
+		<%= link_to 'Edit', edit_task_path(task), remote: true %> | 
+		<%= link_to 'Destroy', task, remote: true, method: :delete, data: { confirm: 'Are you sure?' } %>
+	<% end %>
+	<br>
 <% end %>

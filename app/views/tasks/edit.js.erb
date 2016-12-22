@@ -1,4 +1,3 @@
-$('form').hide();
-
-// Replace the correct DOM element with the edit form
-$('div#<%= dom_id(@task) %>').replaceWith('<%= j render("form") %>');
+$('div#<%= dom_id(@task) %>').empty();
+$('div#<%= dom_id(@task) %>').append("<h3>Edit Task</h3>");
+$('div#<%= dom_id(@task) %>').append('<%= j(render(partial: "form", locals:{task: @task})) %>');

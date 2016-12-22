@@ -1,5 +1,2 @@
-// Hide the form
-$('form').hide();
-
-// Replace the old Task and the Edit form with the newly updated task.
-$('div#<%= dom_id(@task) %>').replaceWith('<%= j render partial: "task", locals: {task: @task} %>');
+$('div#<%= dom_id(@task) %>').empty();
+$('div#<%= dom_id(@task) %>').replaceWith('<%= j(render @task) %>');

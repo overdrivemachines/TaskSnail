@@ -2,6 +2,15 @@
 
 Inspired by https://github.com/codediodeio/tasksnail
 
+```ruby
++ _task.html.erb
++ complete.js.erb
++ create.js.erb
++ destroy.js.erb
++ edit.js.erb
++ new.js.erb
++ update.js.erb
+```
 One page app where users can View, Create, Update and Delete Tasks. They can also mark Tasks complete. CRUD implemented using AJAX in Rails 5.
 
 ![TaskSnail ERD](erd.png)

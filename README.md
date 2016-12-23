@@ -1,4 +1,10 @@
-# README
+# TaskSnail
+
+Inspired by https://github.com/codediodeio/tasksnail
+
+One page app where users can View, Create, Update and Delete Tasks. They can also mark Tasks complete. CRUD implemented using AJAX in Rails 5.
+
+![TaskSnail ERD](erd.png)
 
 Inspired by https://github.com/codediodeio/tasksnail
 

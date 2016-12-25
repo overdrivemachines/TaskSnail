@@ -14,3 +14,24 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+$(document).on("turbolinks:load", function() {
+	// console.log($(this).text());
+	// alert("hello loaded");
+
+	// $('.mark-complete-link').on("ajax:send", function(event, xhr) {
+	// 	// when the request is sent
+	// 	alert("Request sent");
+	// });
+
+	// $('.mark-complete-link').on("ajax:success", function(event, data, status, xhr) {
+	// 	// after completion, if the HTTP response was a success
+	// 	alert("Success");
+	// });
+
+	// $('.mark-complete-link').on("ajax:error", function(event, xhr, status, error) {
+	// 	// after completion, if the HTTP response was a success
+	// 	alert("Error");
+	// });	
+});
+

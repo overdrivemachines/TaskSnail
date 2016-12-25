@@ -2,7 +2,7 @@
 	<b><%= task.name %></b> by <%= task.user.email %> 
 	<% if (task.completed == false) %>
 		| 
-		<%= link_to "Mark Complete", complete_path(task), remote: true %> | 
+		<%= link_to "Mark Complete", complete_path(task), remote: true, :class => "mark-complete-link" %> | 
 		<%= link_to 'Edit', edit_task_path(task), remote: true %> | 
 		<%= link_to 'Destroy', task, remote: true, method: :delete, data: { confirm: 'Are you sure?' } %>
 	<% end %>

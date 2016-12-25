@@ -3,3 +3,4 @@ $('div.new-task-form').show();
 $('div.new-task-form').append("<h3>New Task</h3>");
 $('div.new-task-form').append('<%= j(render(partial: "form", locals:{task: @task}))%>');
 $('a.new-task-link').hide();
+$('#task_name').focus();

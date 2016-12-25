@@ -2,7 +2,8 @@
 
 Inspired by https://github.com/codediodeio/tasksnail
 
-```ruby
+Files added to `app/views`
+```
 + _task.html.erb
 + complete.js.erb
 + create.js.erb
